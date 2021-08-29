@@ -2,6 +2,7 @@ package pl.glownia.pamela;
 
 public class Calculator {
     private Input input = new Input();
+    private Printer printer = new Printer();
 
     double calculatePurchases(String list) {
         double count = 0.00;
@@ -18,5 +19,17 @@ public class Calculator {
             }
         }
         return count;
+    }
+
+    double calculateTotalPrice(String list) {
+        double price = calculatePurchases(list);
+        printer.printTotalPrice(price);
+        return price;
+    }
+
+    void run() {
+        String list = input.takeAListOfPurchases();
+        printer.printAListOfPurchases(list);
+        double totalPrice = calculateTotalPrice(list);
     }
 }
