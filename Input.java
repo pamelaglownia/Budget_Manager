@@ -1,18 +1,18 @@
 package pl.glownia.pamela;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {
-    private Scanner scan = new Scanner(System.in);
+    private final Scanner scan = new Scanner(System.in);
 
-    String takeAListOfPurchases() {
+    ArrayList<String> takeAListOfPurchases() {
         System.out.println("Provide list of products with prices. \nWhen you finish, mark end-of-file (Ctrl+D on Linux and Mac or Ctrl+Z on Windows): ");
-        StringBuilder listOfPurchases = new StringBuilder();
+        ArrayList<String> listOfPurchases = new ArrayList<>();
         while (scan.hasNextLine()) {
             String userInput = scan.nextLine();
-            listOfPurchases.append(userInput);
-            listOfPurchases.append("\n");
+            listOfPurchases.add(userInput);
         }
-        return listOfPurchases.toString();
+        return listOfPurchases;
     }
 }
