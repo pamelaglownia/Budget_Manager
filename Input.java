@@ -15,4 +15,13 @@ public class Input {
         }
         return listOfPurchases;
     }
+
+    int takeUserDecision(){
+        int decision = scan.nextInt();
+        while (!(decision>=0 && decision<=4)){
+            System.out.println("Choose one option from 0 to 4:");
+            decision = scan.nextInt();
+        }
+        return decision;
+    }
 }
