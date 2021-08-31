@@ -6,12 +6,15 @@ public class Menu {
 
     void chooseOption() {
         int userDecision;
+        double income = 0;
         do {
             printer.printMenu();
             userDecision = input.takeUserDecision();
             switch (userDecision) {
                 case 1:
-                    System.out.println("Adding income...\n***");
+                    income += input.enterIncome();
+                    //validate if income is added
+                    System.out.println(income);
                     break;
                 case 2:
                     System.out.println("Adding purchase...\n***");
