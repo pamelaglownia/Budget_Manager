@@ -1,20 +1,10 @@
 package pl.glownia.pamela;
 
-import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Input {
-    private final Scanner scan = new Scanner(System.in);
-
-    ArrayList<String> addPurchaseToTheList() {
-        System.out.println("Provide list of products with prices. \nWhen you finish, mark end-of-file (Ctrl+D on Linux and Mac or Ctrl+Z on Windows): ");
-        ArrayList<String> listOfPurchases = new ArrayList<>();
-        while (scan.hasNextLine()) {
-            String userInput = scan.nextLine();
-            listOfPurchases.add(userInput);
-        }
-        return listOfPurchases;
-    }
+    private final Scanner scan = new Scanner(System.in).useLocale(Locale.US);
 
     int takeUserDecision() {
         int decision = scan.nextInt();
@@ -25,15 +15,30 @@ public class Input {
         return decision;
     }
 
-    double enterIncome() {
-        System.out.println("Enter income:");
-        double income;
+    double enterNumber() {
+        double userInputNumber;
         while (!(scan.hasNextDouble())) {
-            System.out.println("Income should be number. Enter income:");
+            System.out.println("Incorrect value. Enter again:");
             scan.next();
         }
-        income = scan.nextDouble();
-        System.out.println("Income added.");
-        return income;
+        userInputNumber = scan.nextDouble();
+        return userInputNumber;
+    }
+
+    String enterPurchase() {
+        System.out.println("Enter purchase name:");
+        String userInputPurchase = scan.nextLine();
+        while (userInputPurchase.equals("")) {
+            System.out.println("Purchase can not be empty. Enter purchase name:");
+            userInputPurchase = scan.nextLine();
+        }
+        System.out.println("Enter its price:");
+        double userInputPrice = enterNumber();
+        scan.nextLine();
+        StringBuilder purchase = new StringBuilder();
+        purchase.append(userInputPurchase);
+        purchase.append(" ");
+        purchase.append(userInputPrice);
+        return purchase.toString();
     }
 }

@@ -3,8 +3,23 @@ package pl.glownia.pamela;
 import java.util.ArrayList;
 
 public class Calculator {
-    private final Input input = new Input();
     private final Printer printer = new Printer();
+    private final Input input = new Input();
+
+
+    ArrayList<String> addPurchaseToTheList(ArrayList<String> listOfPurchases) {
+        String purchase = input.enterPurchase();
+        listOfPurchases.add(purchase);
+        System.out.println("Purchase was added.");
+        return listOfPurchases;
+    }
+
+    double addIncome() {
+        System.out.println("Enter income:");
+        double income = input.enterNumber();
+        System.out.println("Income added.");
+        return income;
+    }
 
     double calculateTotalPrice(ArrayList<String> listOfPurchases) {
         double totalPrice = 0;
@@ -14,11 +29,5 @@ public class Calculator {
         }
         printer.printTotalPrice(totalPrice);
         return totalPrice;
-    }
-
-    void run() {
-        ArrayList<String> listOfPurchases = input.takeAListOfPurchases();
-        printer.printAListOfPurchases(listOfPurchases);
-        double totalPrice = calculateTotalPrice(listOfPurchases);
     }
 }

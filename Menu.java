@@ -1,10 +1,14 @@
 package pl.glownia.pamela;
 
+import java.util.ArrayList;
+
 public class Menu {
     Printer printer = new Printer();
     Input input = new Input();
+    Calculator calculator = new Calculator();
 
     void chooseOption() {
+        ArrayList<String> listOfPurchases = new ArrayList<>();
         int userDecision;
         double income = 0;
         do {
@@ -12,12 +16,10 @@ public class Menu {
             userDecision = input.takeUserDecision();
             switch (userDecision) {
                 case 1:
-                    income += input.enterIncome();
-                    //validate if income is added
-                    System.out.println(income);
+                    income += calculator.addIncome();
                     break;
                 case 2:
-                    System.out.println("Adding purchase...\n***");
+                    calculator.addPurchaseToTheList(listOfPurchases);
                     break;
                 case 3:
                     System.out.println("Showing list of purchases\n***");
