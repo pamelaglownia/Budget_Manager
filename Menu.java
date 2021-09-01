@@ -10,7 +10,7 @@ public class Menu {
     void chooseOption() {
         ArrayList<String> listOfPurchases = new ArrayList<>();
         int userDecision;
-        double income = 0;
+        double income = 0, totalPrice = 0;
         do {
             printer.printMenu();
             userDecision = input.takeUserDecision();
@@ -23,11 +23,11 @@ public class Menu {
                     calculator.addPurchaseToTheList(listOfPurchases);
                     break;
                 case 3:
-                    printer.printAListOfPurchases(listOfPurchases);
-                    calculator.calculateTotalPrice(listOfPurchases);
+                    totalPrice = calculator.calculateTotalPrice(listOfPurchases);
+                    printer.printAListOfPurchases(listOfPurchases,totalPrice);
                     break;
                 case 4:
-                    System.out.println("Showing balance\n***");
+                    calculator.calculateBalance(income,totalPrice);
                     break;
             }
             System.out.println();

@@ -27,7 +27,12 @@ public class Calculator {
             String[] array = purchase.split("\\$");
             totalPrice += Double.parseDouble(array[array.length - 1]);
         }
-        printer.printTotalPrice(totalPrice);
         return totalPrice;
+    }
+
+    double calculateBalance(double income, double totalPrice) {
+        double balance = income - totalPrice;
+        printer.printBalance(balance);
+        return balance;
     }
 }

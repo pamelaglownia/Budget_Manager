@@ -23,6 +23,7 @@ public class Input {
             scan.next();
         }
         userInputNumber = scan.nextDouble();
+        scan.nextLine();
         return userInputNumber;
     }
 
@@ -36,7 +37,7 @@ public class Input {
         }
         System.out.println("Enter its price:");
         double userInputPrice = enterNumber();
-        scan.nextLine();
+//        scan.nextLine();
         StringBuilder purchase = new StringBuilder();
         purchase.append(userInputPurchase);
         purchase.append(" ");

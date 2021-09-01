@@ -19,13 +19,20 @@ public class Printer {
 
     }
 
-    void printAListOfPurchases(ArrayList<String> listOfPurchases) {
+    void printAListOfPurchases(ArrayList<String> listOfPurchases, double totalPrice) {
         if (listOfPurchases.size() == 0) {
             System.out.println("The purchase list is empty");
         }
+        else{
         for (String purchase : listOfPurchases) {
             System.out.println(purchase);
         }
+        printTotalPrice(totalPrice);
+        }
+    }
+
+    void printBalance(double balance) {
+        System.out.println("Balance: " + dollar.format(balance));
     }
 
     void printTotalPrice(double price) {
