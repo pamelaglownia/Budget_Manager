@@ -14,6 +14,7 @@ public class Menu {
         do {
             printer.printMenu();
             userDecision = input.takeUserDecision();
+            System.out.println();
             switch (userDecision) {
                 case 1:
                     income += calculator.addIncome();
@@ -22,12 +23,14 @@ public class Menu {
                     calculator.addPurchaseToTheList(listOfPurchases);
                     break;
                 case 3:
-                    System.out.println("Showing list of purchases\n***");
+                    printer.printAListOfPurchases(listOfPurchases);
+                    calculator.calculateTotalPrice(listOfPurchases);
                     break;
                 case 4:
                     System.out.println("Showing balance\n***");
                     break;
             }
+            System.out.println();
         } while (userDecision != 0);
         System.out.println("Bye!");
     }

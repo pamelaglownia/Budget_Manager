@@ -1,5 +1,6 @@
 package pl.glownia.pamela;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -26,6 +27,7 @@ public class Input {
     }
 
     String enterPurchase() {
+        NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
         System.out.println("Enter purchase name:");
         String userInputPurchase = scan.nextLine();
         while (userInputPurchase.equals("")) {
@@ -38,7 +40,7 @@ public class Input {
         StringBuilder purchase = new StringBuilder();
         purchase.append(userInputPurchase);
         purchase.append(" ");
-        purchase.append(userInputPrice);
+        purchase.append(dollar.format(userInputPrice));
         return purchase.toString();
     }
 }
