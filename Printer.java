@@ -19,15 +19,30 @@ public class Printer {
 
     }
 
+    void printPurchaseCategory(boolean showListMethod) {
+        StringBuilder purchaseCategory = new StringBuilder();
+        purchaseCategory.append("Choose the type of purchase:\n");
+        purchaseCategory.append("1) Food\n");
+        purchaseCategory.append("2) Clothes\n");
+        purchaseCategory.append("3) Entertainment\n");
+        purchaseCategory.append("4) Other\n");
+        if (showListMethod) {
+            purchaseCategory.append("5) All\n");
+            purchaseCategory.append("6) Back");
+        } else {
+            purchaseCategory.append("5) Back");
+        }
+        System.out.println(purchaseCategory);
+    }
+
     void printAListOfPurchases(ArrayList<String> listOfPurchases, double totalPrice) {
         if (listOfPurchases.size() == 0) {
             System.out.println("The purchase list is empty");
-        }
-        else{
-        for (String purchase : listOfPurchases) {
-            System.out.println(purchase);
-        }
-        printTotalPrice(totalPrice);
+        } else {
+            for (String purchase : listOfPurchases) {
+                System.out.println(purchase);
+            }
+            printTotalPrice(totalPrice);
         }
     }
 

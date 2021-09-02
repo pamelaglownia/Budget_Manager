@@ -10,7 +10,7 @@ public class Calculator {
     ArrayList<String> addPurchaseToTheList(ArrayList<String> listOfPurchases) {
         String purchase = input.enterPurchase();
         listOfPurchases.add(purchase);
-        System.out.println("Purchase was added.");
+        System.out.println("Purchase was added.\n");
         return listOfPurchases;
     }
 

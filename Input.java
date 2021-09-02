@@ -27,6 +27,15 @@ public class Input {
         return userInputNumber;
     }
 
+    int chooseTheCategoryOfPurchase() {
+        int categoryNumber = scan.nextInt();
+        while (!(categoryNumber >= 1 && categoryNumber <= 6)) {
+            System.out.println("Choose one option from 1 to 6:");
+            categoryNumber = scan.nextInt();
+        }
+        return categoryNumber;
+    }
+
     String enterPurchase() {
         NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
         System.out.println("Enter purchase name:");
