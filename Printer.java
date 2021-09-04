@@ -1,7 +1,7 @@
 package pl.glownia.pamela;
 
 import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Printer {
@@ -16,7 +16,6 @@ public class Printer {
         menu.append("4) Balance\n");
         menu.append("0) Exit");
         System.out.println(menu);
-
     }
 
     void printPurchaseCategory(boolean showListMethod) {
@@ -35,14 +34,13 @@ public class Printer {
         System.out.println(purchaseCategory);
     }
 
-    void printAListOfPurchases(ArrayList<String> listOfPurchases, double totalPrice) {
-        if (listOfPurchases.size() == 0) {
+    void printAListOfPurchases(List<Purchase> listOfPurchases) {
+        if (listOfPurchases.isEmpty()) {
             System.out.println("The purchase list is empty");
         } else {
-            for (String purchase : listOfPurchases) {
-                System.out.println(purchase);
+            for (Purchase purchase : listOfPurchases) {
+                System.out.println(purchase.toString());
             }
-            printTotalPrice(totalPrice);
         }
     }
 

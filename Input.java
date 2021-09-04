@@ -1,6 +1,5 @@
 package pl.glownia.pamela;
 
-import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -33,24 +32,22 @@ public class Input {
             System.out.println("Choose one option from 1 to 6:");
             categoryNumber = scan.nextInt();
         }
+        scan.nextLine();
         return categoryNumber;
     }
 
-    String enterPurchase() {
-        NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
+    String enterPurchaseName() {
         System.out.println("Enter purchase name:");
-        String userInputPurchase = scan.nextLine();
-        while (userInputPurchase.equals("")) {
+        String productName = scan.nextLine();
+        while (productName.equals("")) {
             System.out.println("Purchase can not be empty. Enter purchase name:");
-            userInputPurchase = scan.nextLine();
+            productName = scan.nextLine();
         }
+        return productName;
+    }
+
+    double enterPrice() {
         System.out.println("Enter its price:");
-        double userInputPrice = enterNumber();
-//        scan.nextLine();
-        StringBuilder purchase = new StringBuilder();
-        purchase.append(userInputPurchase);
-        purchase.append(" ");
-        purchase.append(dollar.format(userInputPrice));
-        return purchase.toString();
+        return enterNumber();
     }
 }
