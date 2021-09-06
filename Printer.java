@@ -52,6 +52,6 @@ public class Printer {
     }
 
     void printTotalPrice(double price) {
-        System.out.println("Total: " + dollar.format(price));
+        System.out.println("Total sum: " + dollar.format(price));
     }
 }

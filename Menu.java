@@ -26,10 +26,7 @@ public class Menu {
             } else if (userDecision == ADD_PURCHASE.getNumber()) {
                 totalPrice = calculator.addPurchaseRelatedToCategory(foodList, clothesList, entertainmentList, otherList, totalPrice);
             } else if (userDecision == SHOW_LIST_OF_PURCHASES.getNumber()) {
-                printer.printAListOfPurchases(foodList);
-                printer.printAListOfPurchases(clothesList);
-                printer.printAListOfPurchases(entertainmentList);
-                printer.printAListOfPurchases(otherList);
+                calculator.showListOfPurchases(foodList, clothesList, entertainmentList, otherList, totalPrice);
             } else if (userDecision == BALANCE.getNumber()) {
                 double balance = calculator.calculateBalance(income, totalPrice);
                 printer.printBalance(balance);
