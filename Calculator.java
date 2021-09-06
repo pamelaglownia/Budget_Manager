@@ -2,6 +2,8 @@ package pl.glownia.pamela;
 
 import java.util.List;
 
+import static pl.glownia.pamela.PurchaseType.*;
+
 public class Calculator {
     private final Input input = new Input();
     private final Printer printer = new Printer();
@@ -37,27 +39,25 @@ public class Calculator {
         do {
             printer.printPurchaseCategory(false);
             userDecision = input.chooseTheCategoryOfPurchase();
-            switch (userDecision) {
-                case 1:
-                    System.out.println("Food:");
-                    foodList.add(addPurchaseToTheList());
-                    totalPrice += calculatePrice(foodList);
-                    break;
-                case 2:
-                    System.out.println("Clothes:");
-                    clothesList.add(addPurchaseToTheList());
-                    totalPrice += calculatePrice(clothesList);
-                    break;
-                case 3:
-                    System.out.println("Entertainment:");
-                    entertainmentList.add(addPurchaseToTheList());
-                    totalPrice += calculatePrice(entertainmentList);
-                    break;
-                case 4:
-                    System.out.println("Other:");
-                    otherList.add(addPurchaseToTheList());
-                    totalPrice += calculatePrice(otherList);
-                    break;
+            if (userDecision == FOOD.getNumber()) {
+                System.out.println(FOOD.getName());
+                foodList.add(addPurchaseToTheList());
+                totalPrice += calculatePrice(foodList);
+            }
+            else if (userDecision == CLOTHES.getNumber()) {
+                System.out.println(CLOTHES.getName());
+                clothesList.add(addPurchaseToTheList());
+                totalPrice += calculatePrice(clothesList);
+            }
+            else if (userDecision == ENTERTAINMENT.getNumber()) {
+                System.out.println(ENTERTAINMENT.getName());
+                entertainmentList.add(addPurchaseToTheList());
+                totalPrice += calculatePrice(entertainmentList);
+            }
+            else if (userDecision == OTHER.getNumber()) {
+                System.out.println(OTHER.getName());
+                otherList.add(addPurchaseToTheList());
+                totalPrice += calculatePrice(otherList);
             }
         } while (userDecision != 5);
         return totalPrice;
