@@ -11,13 +11,12 @@ public class Printer {
     NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
 
     void printMenu() {
-        StringBuilder menu = new StringBuilder();
-        menu.append("Choose your action:\n");
-        menu.append("1) ").append(ADD_INCOME.getName()).append("\n");
-        menu.append("2) ").append(ADD_PURCHASE.getName()).append("\n");
-        menu.append("3) ").append(SHOW_LIST_OF_PURCHASES.getName()).append("\n");
-        menu.append("4) ").append(BALANCE.getName()).append("\n");
-        menu.append("0) ").append(EXIT.getName()).append("\n");
+        String menu = "Choose your action:\n" +
+                "1) " + ADD_INCOME.getName() + "\n" +
+                "2) " + ADD_PURCHASE.getName() + "\n" +
+                "3) " + SHOW_LIST_OF_PURCHASES.getName() + "\n" +
+                "4) " + BALANCE.getName() + "\n" +
+                "0) " + EXIT.getName();
         System.out.println(menu);
     }
 
@@ -37,13 +36,13 @@ public class Printer {
         System.out.println(purchaseCategory);
     }
 
+    void printInformationEmptyList() {
+        System.out.println("The purchase list is empty");
+    }
+
     void printAListOfPurchases(List<Purchase> listOfPurchases) {
-        if (listOfPurchases.isEmpty()) {
-            System.out.println("The purchase list is empty");
-        } else {
-            for (Purchase purchase : listOfPurchases) {
-                System.out.println(purchase.toString());
-            }
+        for (Purchase purchase : listOfPurchases) {
+            System.out.println(purchase.toString());
         }
     }
 

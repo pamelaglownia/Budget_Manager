@@ -5,7 +5,7 @@ import java.util.List;
 
 import static pl.glownia.pamela.MenuOption.*;
 
-public class Menu {
+public class BudgetManager {
     Printer printer = new Printer();
     Input input = new Input();
     Calculator calculator = new Calculator();
@@ -14,12 +14,12 @@ public class Menu {
     private final List<Purchase> entertainmentList = new ArrayList<>();
     private final List<Purchase> otherList = new ArrayList<>();
 
-    void chooseOption() {
+    void run() {
         int userDecision;
         double income = 0, totalPrice = 0;
         do {
             printer.printMenu();
-            userDecision = input.takeUserDecision();
+            userDecision = input.takeUserDecision(EXIT.getNumber(), BALANCE.getNumber());
             System.out.println();
             if (userDecision == ADD_INCOME.getNumber()) {
                 income += calculator.addIncome();
@@ -32,7 +32,7 @@ public class Menu {
                 printer.printBalance(balance);
             }
             System.out.println();
-        } while (userDecision != 0);
+        } while (userDecision != EXIT.getNumber());
         System.out.println("Bye!");
     }
 }

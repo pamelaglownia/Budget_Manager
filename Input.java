@@ -6,11 +6,17 @@ import java.util.Scanner;
 public class Input {
     private final Scanner scan = new Scanner(System.in).useLocale(Locale.US);
 
-    int takeUserDecision() {
-        int decision = scan.nextInt();
-        while (!(decision >= 0 && decision <= 4)) {
-            System.out.println("Choose one option from 0 to 4:");
-            decision = scan.nextInt();
+    int takeUserDecision(int start, int end) {
+        int decision;
+        while (!(scan.hasNextInt())) {
+            System.out.println("Incorrect value. Enter again:");
+            scan.next();
+        }
+        decision = scan.nextInt();
+        scan.nextLine();
+        while (!(decision >= start && decision <= end)) {
+            System.out.println("Choose one option from " + start + " to " + end + ":");
+            decision = takeUserDecision(start, end);
         }
         return decision;
     }
@@ -24,16 +30,6 @@ public class Input {
         userInputNumber = scan.nextDouble();
         scan.nextLine();
         return userInputNumber;
-    }
-
-    int chooseTheCategoryOfPurchase() {
-        int categoryNumber = scan.nextInt();
-        while (!(categoryNumber >= 1 && categoryNumber <= 6)) {
-            System.out.println("Choose one option from 1 to 6:");
-            categoryNumber = scan.nextInt();
-        }
-        scan.nextLine();
-        return categoryNumber;
     }
 
     String enterPurchaseName() {

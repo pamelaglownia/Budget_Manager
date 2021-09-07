@@ -12,7 +12,7 @@ public class Calculator {
     Purchase addPurchaseToTheList() {
         String productName = input.enterPurchaseName();
         double productPrice = input.enterPrice();
-        System.out.println("Purchase was added.\n");
+        System.out.println("Purchase was added.");
         return new Purchase(productName, productPrice);
     }
 
@@ -39,7 +39,7 @@ public class Calculator {
         int userDecision;
         do {
             printer.printPurchaseCategory(false);
-            userDecision = input.chooseTheCategoryOfPurchase();
+            userDecision = input.takeUserDecision(1, 5);
             if (userDecision == FOOD.getNumber()) {
                 System.out.println(FOOD.getName());
                 foodList.add(addPurchaseToTheList());
@@ -57,46 +57,70 @@ public class Calculator {
                 otherList.add(addPurchaseToTheList());
                 totalPrice += calculatePrice(otherList);
             }
+            System.out.println();
         } while (userDecision != 5);
         return totalPrice;
     }
+
 
     void showListOfPurchases(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, double totalPrice) {
         int userDecision;
         double partPrice;
         do {
             printer.printPurchaseCategory(true);
-            userDecision = input.chooseTheCategoryOfPurchase();
+            userDecision = input.takeUserDecision(1, 6);
+            System.out.println();
             if (userDecision == FOOD.getNumber()) {
-                System.out.println(FOOD.getName());
-                printer.printAListOfPurchases(foodList);
-                partPrice = calculatePrice(foodList);
-                printer.printTotalPrice(partPrice);
+                if (foodList.isEmpty()) {
+                    printer.printInformationEmptyList();
+                } else {
+                    System.out.println(FOOD.getName());
+                    printer.printAListOfPurchases(foodList);
+                    partPrice = calculatePrice(foodList);
+                    printer.printTotalPrice(partPrice);
+                }
             } else if (userDecision == CLOTHES.getNumber()) {
-                System.out.println(CLOTHES.getName());
-                printer.printAListOfPurchases(clothesList);
-                partPrice = calculatePrice(clothesList);
-                printer.printTotalPrice(partPrice);
+                if (clothesList.isEmpty()) {
+                    printer.printInformationEmptyList();
+                } else {
+                    System.out.println(CLOTHES.getName());
+                    printer.printAListOfPurchases(clothesList);
+                    partPrice = calculatePrice(clothesList);
+                    printer.printTotalPrice(partPrice);
+                }
             } else if (userDecision == ENTERTAINMENT.getNumber()) {
-                System.out.println(ENTERTAINMENT.getName());
-                printer.printAListOfPurchases(entertainmentList);
-                partPrice = calculatePrice(entertainmentList);
-                printer.printTotalPrice(partPrice);
+                if (entertainmentList.isEmpty()) {
+                    printer.printInformationEmptyList();
+                } else {
+                    System.out.println(ENTERTAINMENT.getName());
+                    printer.printAListOfPurchases(entertainmentList);
+                    partPrice = calculatePrice(entertainmentList);
+                    printer.printTotalPrice(partPrice);
+                }
             } else if (userDecision == OTHER.getNumber()) {
-                System.out.println(OTHER.getName());
-                printer.printAListOfPurchases(otherList);
-                partPrice = calculatePrice(otherList);
-                printer.printTotalPrice(partPrice);
+                if (otherList.isEmpty()) {
+                    printer.printInformationEmptyList();
+                } else {
+                    System.out.println(OTHER.getName());
+                    printer.printAListOfPurchases(otherList);
+                    partPrice = calculatePrice(otherList);
+                    printer.printTotalPrice(partPrice);
+                }
             } else if (userDecision == ALL.getNumber()) {
-                System.out.println(ALL.getName());
                 List<Purchase> listOfAllPurchases = new ArrayList<>();
                 listOfAllPurchases.addAll(foodList);
                 listOfAllPurchases.addAll(clothesList);
                 listOfAllPurchases.addAll(entertainmentList);
                 listOfAllPurchases.addAll(otherList);
-                printer.printAListOfPurchases(listOfAllPurchases);
-                printer.printTotalPrice(totalPrice);
+                if (listOfAllPurchases.isEmpty()) {
+                    printer.printInformationEmptyList();
+                } else {
+                    System.out.println(ALL.getName());
+                    printer.printAListOfPurchases(listOfAllPurchases);
+                    printer.printTotalPrice(totalPrice);
+                }
             }
+            System.out.println();
         } while (userDecision != 6);
     }
 }
