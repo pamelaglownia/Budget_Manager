@@ -16,6 +16,8 @@ public class Printer {
                 "2) " + ADD_PURCHASE.getName() + "\n" +
                 "3) " + SHOW_LIST_OF_PURCHASES.getName() + "\n" +
                 "4) " + BALANCE.getName() + "\n" +
+                "5) " + SAVE.getName() + "\n" +
+                "6) " + LOAD.getName() + "\n" +
                 "0) " + EXIT.getName();
         System.out.println(menu);
     }
