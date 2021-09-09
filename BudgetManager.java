@@ -1,6 +1,5 @@
 package pl.glownia.pamela;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +33,9 @@ class BudgetManager {
                 double balance = calculator.calculateBalance(income, totalPrice);
                 printer.printBalance(balance);
             } else if (userDecision == SAVE.getNumber()) {
-                try {
-                    fileManager.savePurchasesInTheFile(listOfAllPurchases);
-                } catch (IOException e) {
-                    System.out.printf("An exception occurs %s", e.getMessage());
-                }
+                fileManager.savePurchasesInTheFile(listOfAllPurchases);
             } else if (userDecision == LOAD.getNumber()) {
-
+                fileManager.readListOfPurchasesFromFile();
             }
             System.out.println();
         } while (userDecision != EXIT.getNumber());
