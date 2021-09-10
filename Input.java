@@ -29,6 +29,10 @@ public class Input {
         }
         userInputNumber = scan.nextDouble();
         scan.nextLine();
+        while (userInputNumber <= 0) {
+            System.out.println("Value has to be greater than zero. Enter again:");
+            userInputNumber = enterNumber();
+        }
         return userInputNumber;
     }
 
