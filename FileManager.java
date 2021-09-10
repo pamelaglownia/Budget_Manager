@@ -14,16 +14,26 @@ class FileManager {
         this.file = new File("./src/pl/glownia/pamela/purchases.txt");
     }
 
-    void savePurchasesInTheFile(List<Purchase> listOfAllPurchases) {
+    void savePurchasesInTheFile(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, double balance) {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for (Purchase element : listOfAllPurchases) {
-                fileWriter.write(element.toString() + "\n");
-            }
+            fileWriter.write(String.format("Balance: $ %.2f \n", balance));
+            writePurchaseToFile(fileWriter, foodList, PurchaseType.FOOD.getName());
+            writePurchaseToFile(fileWriter, clothesList, PurchaseType.CLOTHES.getName());
+            writePurchaseToFile(fileWriter, entertainmentList, PurchaseType.ENTERTAINMENT.getName());
+            writePurchaseToFile(fileWriter, otherList, PurchaseType.OTHER.getName());
             fileWriter.close();
             System.out.println("Purchases were saved!");
         } catch (IOException e) {
             System.out.printf("An exception occurs %s", e.getMessage());
+        }
+    }
+
+    void writePurchaseToFile(FileWriter fileWriter, List<Purchase> purchaseList, String category) throws IOException {
+        if (!purchaseList.isEmpty()) {
+            for (Purchase element : purchaseList) {
+                fileWriter.write(category + ": " + element.toString() + "\n");
+            }
         }
     }
 
