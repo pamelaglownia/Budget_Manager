@@ -43,7 +43,7 @@ public class Input {
             System.out.println("Purchase can not be empty. Enter purchase name:");
             productName = scan.nextLine();
         }
-        return productName;
+        return productName.trim();
     }
 
     double enterPrice() {
