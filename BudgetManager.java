@@ -38,7 +38,7 @@ class BudgetManager {
                 }
                 fileManager.savePurchasesInTheFile(foodList, clothesList, entertainmentList, otherList, balance);
             } else if (userDecision == LOAD.getNumber()) {
-                fileManager.readListOfPurchasesFromFile();
+                fileManager.loadListOfPurchasesFromFile(balance);
             }
             System.out.println();
         } while (userDecision != EXIT.getNumber());
