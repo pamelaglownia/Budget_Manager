@@ -25,20 +25,21 @@ class BudgetManager {
             System.out.println();
             if (userDecision == ADD_INCOME.getNumber()) {
                 income += calculator.addIncome();
+                balance = calculator.calculateBalance(income, totalPrice);
             } else if (userDecision == ADD_PURCHASE.getNumber()) {
-                totalPrice = calculator.addPurchaseRelatedToCategory(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases, totalPrice);
+                calculator.addPurchaseRelatedToCategory(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
+                totalPrice = calculator.calculatePrice(listOfAllPurchases);
+                balance = calculator.calculateBalance(income, totalPrice);
             } else if (userDecision == SHOW_LIST_OF_PURCHASES.getNumber()) {
                 calculator.showListOfPurchases(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases, totalPrice);
             } else if (userDecision == BALANCE.getNumber()) {
-                balance = calculator.calculateBalance(income, totalPrice);
                 printer.printBalance(balance);
             } else if (userDecision == SAVE.getNumber()) {
-                if (balance == 0) {
-                    balance = calculator.calculateBalance(income, totalPrice);
-                }
                 fileManager.savePurchasesInTheFile(foodList, clothesList, entertainmentList, otherList, balance);
             } else if (userDecision == LOAD.getNumber()) {
-                fileManager.loadListOfPurchasesFromFile(balance);
+                fileManager.loadListOfPurchasesFromFile(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
+                totalPrice = calculator.calculatePrice(listOfAllPurchases);
+                balance = fileManager.loadBalanceFromAFile();
             }
             System.out.println();
         } while (userDecision != EXIT.getNumber());

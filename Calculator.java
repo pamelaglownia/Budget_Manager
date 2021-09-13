@@ -4,7 +4,7 @@ import java.util.List;
 
 import static pl.glownia.pamela.PurchaseType.*;
 
-public class Calculator {
+class Calculator {
     private final Input input = new Input();
     private final Printer printer = new Printer();
 
@@ -25,7 +25,7 @@ public class Calculator {
     double calculatePrice(List<Purchase> listOfPurchases) {
         double price = 0;
         for (Purchase purchase : listOfPurchases) {
-            price = purchase.getProductPrice();
+            price += purchase.getProductPrice();
         }
         return price;
     }
@@ -34,7 +34,7 @@ public class Calculator {
         return income - totalPrice;
     }
 
-    double addPurchaseRelatedToCategory(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases, double totalPrice) {
+    void addPurchaseRelatedToCategory(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
         int userDecision;
         do {
             printer.printPurchaseCategory(false);
@@ -43,31 +43,26 @@ public class Calculator {
                 System.out.println(FOOD.getName());
                 foodList.add(addPurchaseToTheList());
                 listOfAllPurchases.add(foodList.get((foodList.size() - 1)));
-                totalPrice += calculatePrice(foodList);
             } else if (userDecision == CLOTHES.getNumber()) {
                 System.out.println(CLOTHES.getName());
                 clothesList.add(addPurchaseToTheList());
                 listOfAllPurchases.add(clothesList.get((clothesList.size() - 1)));
-                totalPrice += calculatePrice(clothesList);
             } else if (userDecision == ENTERTAINMENT.getNumber()) {
                 System.out.println(ENTERTAINMENT.getName());
                 entertainmentList.add(addPurchaseToTheList());
                 listOfAllPurchases.add(entertainmentList.get((entertainmentList.size() - 1)));
-                totalPrice += calculatePrice(entertainmentList);
             } else if (userDecision == OTHER.getNumber()) {
                 System.out.println(OTHER.getName());
                 otherList.add(addPurchaseToTheList());
                 listOfAllPurchases.add(otherList.get((otherList.size() - 1)));
-                totalPrice += calculatePrice(otherList);
             }
             System.out.println();
         } while (userDecision != 5);
-        return totalPrice;
     }
+
 
     void showListOfPurchases(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases, double totalPrice) {
         int userDecision;
-        double partPrice;
         do {
             printer.printPurchaseCategory(true);
             userDecision = input.takeUserDecision(1, 6);
@@ -78,8 +73,7 @@ public class Calculator {
                 } else {
                     System.out.println(FOOD.getName() + ":");
                     printer.printAListOfPurchases(foodList);
-                    partPrice = calculatePrice(foodList);
-                    printer.printTotalPrice(partPrice);
+                    printer.printTotalPrice(calculatePrice(foodList));
                 }
             } else if (userDecision == CLOTHES.getNumber()) {
                 if (clothesList.isEmpty()) {
@@ -87,8 +81,7 @@ public class Calculator {
                 } else {
                     System.out.println(CLOTHES.getName() + ":");
                     printer.printAListOfPurchases(clothesList);
-                    partPrice = calculatePrice(clothesList);
-                    printer.printTotalPrice(partPrice);
+                    printer.printTotalPrice(calculatePrice(clothesList));
                 }
             } else if (userDecision == ENTERTAINMENT.getNumber()) {
                 if (entertainmentList.isEmpty()) {
@@ -96,8 +89,7 @@ public class Calculator {
                 } else {
                     System.out.println(ENTERTAINMENT.getName() + ":");
                     printer.printAListOfPurchases(entertainmentList);
-                    partPrice = calculatePrice(entertainmentList);
-                    printer.printTotalPrice(partPrice);
+                    printer.printTotalPrice(calculatePrice(entertainmentList));
                 }
             } else if (userDecision == OTHER.getNumber()) {
                 if (otherList.isEmpty()) {
@@ -105,8 +97,7 @@ public class Calculator {
                 } else {
                     System.out.println(OTHER.getName() + ":");
                     printer.printAListOfPurchases(otherList);
-                    partPrice = calculatePrice(otherList);
-                    printer.printTotalPrice(partPrice);
+                    printer.printTotalPrice(calculatePrice(otherList));
                 }
             } else if (userDecision == ALL.getNumber()) {
                 if (listOfAllPurchases.isEmpty()) {
@@ -114,7 +105,7 @@ public class Calculator {
                 } else {
                     System.out.println(ALL.getName() + ":");
                     printer.printAListOfPurchases(listOfAllPurchases);
-                    printer.printTotalPrice(totalPrice);
+                    printer.printTotalPrice(calculatePrice(listOfAllPurchases));
                 }
             }
             System.out.println();
