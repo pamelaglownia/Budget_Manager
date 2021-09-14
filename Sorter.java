@@ -5,7 +5,7 @@ import java.util.List;
 import static pl.glownia.pamela.SortingOption.*;
 import static pl.glownia.pamela.PurchaseType.*;
 
-public class Sorter {
+class Sorter {
     Printer printer = new Printer();
     Input input = new Input();
 
@@ -28,7 +28,7 @@ public class Sorter {
         } while (userDecision != 4);
     }
 
-    void sortAllPurchases(List<Purchase> listOfPurchases) {
+    private void sortAllPurchases(List<Purchase> listOfPurchases) {
         if (listOfPurchases.isEmpty()) {
             printer.printInformationEmptyList();
         }
@@ -44,7 +44,7 @@ public class Sorter {
         printer.printAListOfPurchases(listOfPurchases);
     }
 
-    void sortByType(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList) {
+    private void sortByType(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList) {
         Calculator calculator = new Calculator();
         double foodPrice = calculator.calculatePrice(foodList);
         double clothesPrice = calculator.calculatePrice(clothesList);
@@ -62,11 +62,15 @@ public class Sorter {
             }
         }
         System.out.println("Types:");
-        printer.printSortedPricesByCategories(priceArray, foodPrice, clothesPrice, entertainmentPrice, otherPrice);
+        if (totalPrice > 0) {
+            printer.printSortedPricesByCategories(priceArray, foodPrice, clothesPrice, entertainmentPrice, otherPrice);
+        } else {
+            printer.printEmptyCategories();
+        }
         printer.printTotalPrice(totalPrice);
     }
 
-    void sortOneCategory(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList) {
+    private void sortOneCategory(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList) {
         printer.printPurchaseCategoryToSort();
         int userDecision = input.takeUserDecision(1, 4);
         if (userDecision == FOOD.getNumber()) {

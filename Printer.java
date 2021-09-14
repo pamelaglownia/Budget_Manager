@@ -7,7 +7,7 @@ import static pl.glownia.pamela.PurchaseType.*;
 import static pl.glownia.pamela.MenuOption.*;
 import static pl.glownia.pamela.SortingOption.*;
 
-public class Printer {
+class Printer {
     NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
 
     void printMenu() {
@@ -78,6 +78,13 @@ public class Printer {
                 System.out.println(OTHER.getName() + " - " + dollar.format(otherPrice));
             }
         }
+    }
+
+    void printEmptyCategories() {
+        System.out.println(FOOD.getName() + " - " + dollar.format(0));
+        System.out.println(CLOTHES.getName() + " - " + dollar.format(0));
+        System.out.println(ENTERTAINMENT.getName() + " - " + dollar.format(0));
+        System.out.println(OTHER.getName() + " - " + dollar.format(0));
     }
 
     void printPurchaseCategoryToSort() {
