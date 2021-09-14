@@ -1,11 +1,11 @@
 package pl.glownia.pamela;
 
 import java.text.NumberFormat;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static pl.glownia.pamela.PurchaseType.*;
 import static pl.glownia.pamela.MenuOption.*;
+import static pl.glownia.pamela.SortingOption.*;
 
 public class Printer {
     NumberFormat dollar = NumberFormat.getCurrencyInstance(Locale.US);
@@ -18,6 +18,7 @@ public class Printer {
                 "4) " + BALANCE.getName() + "\n" +
                 "5) " + SAVE.getName() + "\n" +
                 "6) " + LOAD.getName() + "\n" +
+                "7) " + ANALYZE.getName() + "\n" +
                 "0) " + EXIT.getName();
         System.out.println(menu);
     }
@@ -54,5 +55,37 @@ public class Printer {
 
     void printTotalPrice(double price) {
         System.out.println("Total sum: " + dollar.format(price));
+    }
+
+    void printSortingOptions() {
+        String option = "How do you want to sort?\n" +
+                "1) " + ALL_PURCHASES.getOption() + "\n" +
+                "2) " + TYPE.getOption() + "\n" +
+                "3) " + CERTAIN_TYPE.getOption() + "\n" +
+                "4) " + BACK.getOption() + "\n";
+        System.out.println(option);
+    }
+
+    void printSortedPricesByCategories(double[] pricesArray, double foodPrice, double clothesPrice, double entertainmentPrice, double otherPrice) {
+        for (double categoryPrice : pricesArray) {
+            if (categoryPrice == foodPrice) {
+                System.out.println(FOOD.getName() + " - " + dollar.format(foodPrice));
+            } else if (categoryPrice == clothesPrice) {
+                System.out.println(CLOTHES.getName() + " - " + dollar.format(clothesPrice));
+            } else if (categoryPrice == entertainmentPrice) {
+                System.out.println(ENTERTAINMENT.getName() + " - " + dollar.format(entertainmentPrice));
+            } else if (categoryPrice == otherPrice) {
+                System.out.println(OTHER.getName() + " - " + dollar.format(otherPrice));
+            }
+        }
+    }
+
+    void printPurchaseCategoryToSort() {
+        String purchaseCategory = "Choose the type of purchase:\n" +
+                "1) " + FOOD.getName() + "\n" +
+                "2) " + CLOTHES.getName() + "\n" +
+                "3) " + ENTERTAINMENT.getName() + "\n" +
+                "4) " + OTHER.getName() + "\n";
+        System.out.println(purchaseCategory);
     }
 }

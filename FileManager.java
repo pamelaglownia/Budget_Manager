@@ -37,6 +37,7 @@ class FileManager {
     }
 
     void loadListOfPurchasesFromFile(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
+        clearAllLists(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
         try (Scanner scan = new Scanner(file)) {
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
@@ -77,5 +78,13 @@ class FileManager {
             System.out.println("File doesn't exist.");
         }
         return balance;
+    }
+
+    void clearAllLists(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
+        foodList.clear();
+        clothesList.clear();
+        entertainmentList.clear();
+        otherList.clear();
+        listOfAllPurchases.clear();
     }
 }

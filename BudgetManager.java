@@ -9,7 +9,6 @@ class BudgetManager {
     Printer printer = new Printer();
     Input input = new Input();
     Calculator calculator = new Calculator();
-    FileManager fileManager = new FileManager();
     private final List<Purchase> foodList = new ArrayList<>();
     private final List<Purchase> clothesList = new ArrayList<>();
     private final List<Purchase> entertainmentList = new ArrayList<>();
@@ -21,7 +20,7 @@ class BudgetManager {
         double income = 0, totalPrice = 0, balance = 0;
         do {
             printer.printMenu();
-            userDecision = input.takeUserDecision(EXIT.getNumber(), LOAD.getNumber());
+            userDecision = input.takeUserDecision(0, 7);
             System.out.println();
             if (userDecision == ADD_INCOME.getNumber()) {
                 income += calculator.addIncome();
@@ -35,11 +34,16 @@ class BudgetManager {
             } else if (userDecision == BALANCE.getNumber()) {
                 printer.printBalance(balance);
             } else if (userDecision == SAVE.getNumber()) {
+                FileManager fileManager = new FileManager();
                 fileManager.savePurchasesInTheFile(foodList, clothesList, entertainmentList, otherList, balance);
             } else if (userDecision == LOAD.getNumber()) {
+                FileManager fileManager = new FileManager();
                 fileManager.loadListOfPurchasesFromFile(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
                 totalPrice = calculator.calculatePrice(listOfAllPurchases);
                 balance = fileManager.loadBalanceFromAFile();
+            } else if (userDecision == ANALYZE.getNumber()) {
+                Sorter sorter = new Sorter();
+                sorter.sort(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
             }
             System.out.println();
         } while (userDecision != EXIT.getNumber());
