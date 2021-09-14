@@ -11,11 +11,11 @@ enum PurchaseType {
         this.name = name;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return number;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 }

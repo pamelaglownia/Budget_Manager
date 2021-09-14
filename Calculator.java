@@ -61,7 +61,7 @@ class Calculator {
     }
 
 
-    void showListOfPurchases(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases, double totalPrice) {
+    void showListOfPurchases(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
         int userDecision;
         do {
             printer.printPurchaseCategory(true);

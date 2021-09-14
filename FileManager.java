@@ -28,7 +28,7 @@ class FileManager {
         }
     }
 
-    void writePurchaseToFile(FileWriter fileWriter, List<Purchase> purchaseList, String category) throws IOException {
+    private void writePurchaseToFile(FileWriter fileWriter, List<Purchase> purchaseList, String category) throws IOException {
         if (!purchaseList.isEmpty()) {
             for (Purchase element : purchaseList) {
                 fileWriter.write(category + ":" + element.toString() + "\n");
@@ -80,7 +80,7 @@ class FileManager {
         return balance;
     }
 
-    void clearAllLists(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
+    private void clearAllLists(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
         foodList.clear();
         clothesList.clear();
         entertainmentList.clear();

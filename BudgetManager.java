@@ -6,9 +6,9 @@ import java.util.List;
 import static pl.glownia.pamela.MenuOption.*;
 
 class BudgetManager {
-    Printer printer = new Printer();
-    Input input = new Input();
-    Calculator calculator = new Calculator();
+    private final Printer printer = new Printer();
+    private final Input input = new Input();
+    private final Calculator calculator = new Calculator();
     private final List<Purchase> foodList = new ArrayList<>();
     private final List<Purchase> clothesList = new ArrayList<>();
     private final List<Purchase> entertainmentList = new ArrayList<>();
@@ -30,7 +30,7 @@ class BudgetManager {
                 totalPrice = calculator.calculatePrice(listOfAllPurchases);
                 balance = calculator.calculateBalance(income, totalPrice);
             } else if (userDecision == SHOW_LIST_OF_PURCHASES.getNumber()) {
-                calculator.showListOfPurchases(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases, totalPrice);
+                calculator.showListOfPurchases(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
             } else if (userDecision == BALANCE.getNumber()) {
                 printer.printBalance(balance);
             } else if (userDecision == SAVE.getNumber()) {

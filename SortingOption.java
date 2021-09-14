@@ -1,6 +1,6 @@
 package pl.glownia.pamela;
 
-public enum SortingOption {
+enum SortingOption {
     ALL_PURCHASES(1, "Sort all purchases"), TYPE(2, "Sort by type"), CERTAIN_TYPE(3, "Sort certain type"), BACK(4, "Back");
 
     private final int number;
@@ -11,11 +11,11 @@ public enum SortingOption {
         this.option = option;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return number;
     }
 
-    public String getOption() {
+    String getOption() {
         return option;
     }
 }

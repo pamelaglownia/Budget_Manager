@@ -3,7 +3,7 @@ package pl.glownia.pamela;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Purchase {
+class Purchase {
     private final String productName;
     private final double productPrice;
 
