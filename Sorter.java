@@ -1,5 +1,8 @@
 package pl.glownia.pamela;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static pl.glownia.pamela.SortingOption.*;
@@ -32,15 +35,7 @@ class Sorter {
         if (listOfPurchases.isEmpty()) {
             printer.printInformationEmptyList();
         }
-        for (int i = 0; i < listOfPurchases.size(); i++) {
-            for (int j = 0; j < listOfPurchases.size() - i - 1; j++) {
-                if (listOfPurchases.get(j).getProductPrice() < listOfPurchases.get(j + 1).getProductPrice()) {
-                    Purchase temp = listOfPurchases.get(j);
-                    listOfPurchases.set(j, listOfPurchases.get(j + 1));
-                    listOfPurchases.set(j + 1, temp);
-                }
-            }
-        }
+        listOfPurchases.sort(Comparator.comparing(Purchase::getProductPrice).reversed());
         printer.printAListOfPurchases(listOfPurchases);
     }
 
@@ -52,15 +47,7 @@ class Sorter {
         double otherPrice = calculator.calculatePrice(otherList);
         double totalPrice = foodPrice + clothesPrice + entertainmentPrice + otherPrice;
         double[] priceArray = {foodPrice, clothesPrice, entertainmentPrice, otherPrice};
-        for (int i = 0; i < priceArray.length; i++) {
-            for (int j = 0; j < priceArray.length - i - 1; j++) {
-                if (priceArray[j] < priceArray[j + 1]) {
-                    double temp = priceArray[j];
-                    priceArray[j] = priceArray[j + 1];
-                    priceArray[j + 1] = temp;
-                }
-            }
-        }
+        Arrays.asList(priceArray).sort(Collections.reverseOrder());
         System.out.println("Types:");
         if (totalPrice > 0) {
             printer.printSortedPricesByCategories(priceArray, foodPrice, clothesPrice, entertainmentPrice, otherPrice);
