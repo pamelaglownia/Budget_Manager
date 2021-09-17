@@ -28,7 +28,7 @@ The most valuable concepts of this project (for me) are:
 - collections,
 - handling exceptions,
 - writing/reading files,
-- bubble sort.
+- stream API.
 
 ### How to run your project? ###
 1. Ensure that you have Java JDK 1.8 or higher.
