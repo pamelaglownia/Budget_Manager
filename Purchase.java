@@ -4,16 +4,28 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 class Purchase {
-    private final String productName;
-    private final double productPrice;
-
-    Purchase(String productName, double productPrice) {
-        this.productName = productName;
-        this.productPrice = productPrice;
-    }
+    private PurchaseType purchaseType;
+    private String productName;
+    private double productPrice;
 
     double getProductPrice() {
         return productPrice;
+    }
+
+    PurchaseType getPurchaseType() {
+        return purchaseType;
+    }
+
+    void setPurchaseType(PurchaseType purchaseType) {
+        this.purchaseType = purchaseType;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override

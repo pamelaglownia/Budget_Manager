@@ -12,55 +12,42 @@ class FileManager {
     private final File file;
 
     FileManager() {
-        this.file = new File("./src/pl/glownia/pamela/purchases.txt");
+        this.file = new File("purchases.txt");
     }
 
-    void savePurchasesInTheFile(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, double balance) {
+    void savePurchasesInTheFile(List<Purchase> listOfPurchases, double balance) {
         try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write(String.format(Locale.US, "Balance:$%.2f \n", balance));
-            writePurchaseToFile(fileWriter, foodList, PurchaseType.FOOD.getName());
-            writePurchaseToFile(fileWriter, clothesList, PurchaseType.CLOTHES.getName());
-            writePurchaseToFile(fileWriter, entertainmentList, PurchaseType.ENTERTAINMENT.getName());
-            writePurchaseToFile(fileWriter, otherList, PurchaseType.OTHER.getName());
+            writePurchaseToFile(fileWriter, listOfPurchases);
             System.out.println("Purchases were saved!");
         } catch (IOException e) {
             System.out.printf("An exception occurs %s", e.getMessage());
         }
     }
 
-    private void writePurchaseToFile(FileWriter fileWriter, List<Purchase> purchaseList, String category) throws IOException {
-        if (!purchaseList.isEmpty()) {
-            for (Purchase element : purchaseList) {
-                fileWriter.write(category + ":" + element.toString() + "\n");
+    private void writePurchaseToFile(FileWriter fileWriter, List<Purchase> listOfPurchases) throws IOException {
+        if (!listOfPurchases.isEmpty()) {
+            for (Purchase purchase : listOfPurchases) {
+                fileWriter.write(purchase.getPurchaseType().getName() + ":" + purchase + "\n");
             }
         }
     }
 
-    void loadListOfPurchasesFromFile(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
-        clearAllLists(foodList, clothesList, entertainmentList, otherList, listOfAllPurchases);
+    void loadListOfPurchasesFromFile(List<Purchase> listOfPurchases) {
+        listOfPurchases.clear();
         try (Scanner scan = new Scanner(file)) {
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
-                String purchaseName = line.substring(line.indexOf(":") + 1, line.lastIndexOf("$")).trim();
-                double purchasePrice = Double.parseDouble(line.substring(line.lastIndexOf("$") + 1));
-                if (line.contains("Food")) {
-                    foodList.add(new Purchase(purchaseName, purchasePrice));
-                }
-                if (line.contains("Clothes")) {
-                    clothesList.add(new Purchase(purchaseName, purchasePrice));
-                }
-                if (line.contains("Entertainment")) {
-                    entertainmentList.add(new Purchase(purchaseName, purchasePrice));
-
-                }
-                if (line.contains("Other")) {
-                    otherList.add(new Purchase(purchaseName, purchasePrice));
+                Purchase purchase = new Purchase();
+                for (PurchaseType type : PurchaseType.values()) {
+                    if (type.getName().equals(line.substring(0, line.indexOf(":")))) {
+                        purchase.setPurchaseType(type);
+                        purchase.setProductName(line.substring(line.indexOf(":") + 1, line.lastIndexOf("$")).trim());
+                        purchase.setProductPrice(Double.parseDouble(line.substring(line.lastIndexOf("$") + 1)));
+                        listOfPurchases.add(purchase);
+                    }
                 }
             }
-            listOfAllPurchases.addAll(foodList);
-            listOfAllPurchases.addAll(clothesList);
-            listOfAllPurchases.addAll(entertainmentList);
-            listOfAllPurchases.addAll(otherList);
             System.out.println("Purchased were loaded!");
         } catch (FileNotFoundException e) {
             System.out.println("File doesn't exist.");
@@ -78,13 +65,5 @@ class FileManager {
             System.out.println("File doesn't exist.");
         }
         return balance;
-    }
-
-    private void clearAllLists(List<Purchase> foodList, List<Purchase> clothesList, List<Purchase> entertainmentList, List<Purchase> otherList, List<Purchase> listOfAllPurchases) {
-        foodList.clear();
-        clothesList.clear();
-        entertainmentList.clear();
-        otherList.clear();
-        listOfAllPurchases.clear();
     }
 }

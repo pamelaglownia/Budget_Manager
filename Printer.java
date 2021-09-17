@@ -40,13 +40,11 @@ class Printer {
     }
 
     void printInformationEmptyList() {
-        System.out.println("The purchase list is empty");
+        System.out.println("The purchase list is empty.");
     }
 
     void printAListOfPurchases(List<Purchase> listOfPurchases) {
-        for (Purchase purchase : listOfPurchases) {
-            System.out.println(purchase.toString());
-        }
+        listOfPurchases.forEach(purchase -> System.out.println(purchase.toString()));
     }
 
     void printBalance(double balance) {
@@ -62,29 +60,8 @@ class Printer {
                 "1) " + ALL_PURCHASES.getOption() + "\n" +
                 "2) " + TYPE.getOption() + "\n" +
                 "3) " + CERTAIN_TYPE.getOption() + "\n" +
-                "4) " + BACK.getOption() + "\n";
+                "4) " + BACK.getOption();
         System.out.println(option);
-    }
-
-    void printSortedPricesByCategories(double[] pricesArray, double foodPrice, double clothesPrice, double entertainmentPrice, double otherPrice) {
-        for (double categoryPrice : pricesArray) {
-            if (categoryPrice == foodPrice) {
-                System.out.println(FOOD.getName() + " - " + dollar.format(foodPrice));
-            } else if (categoryPrice == clothesPrice) {
-                System.out.println(CLOTHES.getName() + " - " + dollar.format(clothesPrice));
-            } else if (categoryPrice == entertainmentPrice) {
-                System.out.println(ENTERTAINMENT.getName() + " - " + dollar.format(entertainmentPrice));
-            } else if (categoryPrice == otherPrice) {
-                System.out.println(OTHER.getName() + " - " + dollar.format(otherPrice));
-            }
-        }
-    }
-
-    void printEmptyCategories() {
-        System.out.println(FOOD.getName() + " - " + dollar.format(0));
-        System.out.println(CLOTHES.getName() + " - " + dollar.format(0));
-        System.out.println(ENTERTAINMENT.getName() + " - " + dollar.format(0));
-        System.out.println(OTHER.getName() + " - " + dollar.format(0));
     }
 
     void printPurchaseCategoryToSort() {
@@ -92,7 +69,16 @@ class Printer {
                 "1) " + FOOD.getName() + "\n" +
                 "2) " + CLOTHES.getName() + "\n" +
                 "3) " + ENTERTAINMENT.getName() + "\n" +
-                "4) " + OTHER.getName() + "\n";
+                "4) " + OTHER.getName();
         System.out.println(purchaseCategory);
+    }
+
+    void printCategory(int userDecision) {
+        for (PurchaseType type : PurchaseType.values()) {
+            if (type.getNumber() == userDecision) {
+                System.out.println(type.getName() + ":");
+            }
+        }
+
     }
 }
