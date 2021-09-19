@@ -12,7 +12,7 @@ class FileManager {
     private final File file;
 
     FileManager() {
-        this.file = new File("purchases.txt");
+        this.file = new File("./src/pl/glownia/pamela/purchases.txt");
     }
 
     void savePurchasesInTheFile(List<Purchase> listOfPurchases, double balance) {
