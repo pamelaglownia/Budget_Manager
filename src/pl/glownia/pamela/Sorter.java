@@ -3,8 +3,6 @@ package pl.glownia.pamela;
 import java.util.*;
 
 import static java.util.Comparator.comparing;
-import static pl.glownia.pamela.SortingOption.*;
-import static pl.glownia.pamela.PurchaseType.*;
 
 class Sorter {
     Printer printer = new Printer();
@@ -15,17 +13,22 @@ class Sorter {
         do {
             printer.printSortingOptions();
             userDecision = input.takeUserDecision(1, 4);
-            if (userDecision == ALL_PURCHASES.getNumber()) {
-                sortAllPurchases(listOfPurchases);
-                System.out.println();
-            } else if (userDecision == TYPE.getNumber()) {
-                sortByType(listOfPurchases);
-                System.out.println();
-            } else if (userDecision == CERTAIN_TYPE.getNumber()) {
-                printer.printPurchaseCategoryToSort();
-                int chosenCategory = input.takeUserDecision(1, 4);
-                sortOneCategory(listOfPurchases, chosenCategory);
-                System.out.println();
+            int option = SortingOption.checkUserDecision(userDecision);
+            switch (option) {
+                case 1:
+                    sortAllPurchases(listOfPurchases);
+                    System.out.println();
+                    break;
+                case 2:
+                    sortByType(listOfPurchases);
+                    System.out.println();
+                    break;
+                case 3:
+                    printer.printPurchaseCategoryToSort();
+                    int chosenCategory = input.takeUserDecision(1, 4);
+                    sortOneCategory(listOfPurchases, chosenCategory);
+                    System.out.println();
+                    break;
             }
         } while (userDecision != 4);
     }
@@ -33,15 +36,15 @@ class Sorter {
     private void sortAllPurchases(List<Purchase> listOfPurchases) {
         if (listOfPurchases.isEmpty()) {
             printer.printInformationEmptyList();
+        } else {
+            listOfPurchases.stream()
+                    .sorted(comparing(Purchase::getProductPrice).reversed())
+                    .forEach(System.out::println);
         }
-        System.out.println(ALL.getName());
-        listOfPurchases.stream()
-                .sorted(comparing(Purchase::getProductPrice).reversed())
-                .forEach(System.out::println);
     }
 
     private void sortByType(List<Purchase> listOfPurchases) {
-        Map<String, Double> typePriceMap = new HashMap<>();
+        Map<String, Double> typesOfPurchases = new HashMap<>();
         for (PurchaseType purchaseType : PurchaseType.values()) {
             if (purchaseType.getNumber() != 5) {
                 final int finalNumber = purchaseType.getNumber();
@@ -49,10 +52,10 @@ class Sorter {
                         .filter(purchase -> purchase.getPurchaseType().getNumber() == finalNumber)
                         .mapToDouble(Purchase::getProductPrice)
                         .sum();
-                typePriceMap.put(purchaseType.getName(), sum);
+                typesOfPurchases.put(purchaseType.getName(), sum);
             }
         }
-        typePriceMap.entrySet().stream()
+        typesOfPurchases.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .forEach(element -> System.out.println(element.getKey() + " $" + String.format(Locale.US, "%.2f", element.getValue())));
     }

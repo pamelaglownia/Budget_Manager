@@ -38,12 +38,11 @@ class FileManager {
         try (Scanner scan = new Scanner(file)) {
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
-                Purchase purchase = new Purchase();
                 for (PurchaseType type : PurchaseType.values()) {
                     if (type.getName().equals(line.substring(0, line.indexOf(":")))) {
-                        purchase.setPurchaseType(type);
-                        purchase.setProductName(line.substring(line.indexOf(":") + 1, line.lastIndexOf("$")).trim());
-                        purchase.setProductPrice(Double.parseDouble(line.substring(line.lastIndexOf("$") + 1)));
+                        String productName = line.substring(line.indexOf(":") + 1, line.lastIndexOf("$")).trim();
+                        double productPrice = Double.parseDouble(line.substring(line.lastIndexOf("$") + 1));
+                        Purchase purchase = new Purchase(type, productName, productPrice);
                         listOfPurchases.add(purchase);
                     }
                 }

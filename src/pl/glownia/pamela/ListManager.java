@@ -7,16 +7,11 @@ class ListManager {
     private final Printer printer = new Printer();
 
     Purchase addPurchaseToTheList(int userDecision) {
-        Purchase purchase = new Purchase();
-        for (PurchaseType type : PurchaseType.values()) {
-            if (type.getNumber() == userDecision) {
-                purchase.setPurchaseType(type);
-            }
-        }
-        purchase.setProductName(input.enterPurchaseName());
-        purchase.setProductPrice(input.enterPrice());
+        PurchaseType type = PurchaseType.choosePurchaseType(userDecision);
+        String productName = input.enterPurchaseName();
+        double productPrice = input.enterPrice();
         System.out.println("Purchase was added.");
-        return purchase;
+        return new Purchase(type, productName, productPrice);
     }
 
     double addIncome() {
@@ -63,11 +58,7 @@ class ListManager {
             if (listOfPurchases.isEmpty() && userDecision != 6) {
                 printer.printInformationEmptyList();
             } else {
-                for (PurchaseType type : PurchaseType.values()) {
-                    if (type.getNumber() == userDecision) {
-                        System.out.println(type.getName() + ":");
-                    }
-                }
+                printer.printCategory(userDecision);
                 if (userDecision == 5) {
                     printer.printAListOfPurchases(listOfPurchases);
                     printer.printTotalPrice(calculatePrice(listOfPurchases));
